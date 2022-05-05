@@ -35,13 +35,14 @@ weather_data = pd.DataFrame({
     "temp": temps
 })
 print(weather_data)
-print(weather_data["temp"])
 
 temp_nums = weather_data["temp"].str.extract("(?P<temp_num>\d+)", expand=False)
 weather_data["temp_num"] = temp_nums.astype('int')
 weather_data["temp_num"].mean()
-
 is_night = weather_data["temp"].str.contains("Low")
 weather_data["is_night"] = is_night
 
-weather_data.to_csv('weather_data.csv', index=False)
+weather_data = weather_data.iloc[::2]
+print(weather_data)
+
+weather_data.to_csv('weather_data.csv')
